@@ -17,6 +17,13 @@ jobs:
         run: ci/build-app.sh
       - name: Test
         run: ci/unit-test-app.sh
+      - name: run linting
+        uses: super-linter/super-linter/slim@v7 
+        env:
+          DEFAULT_BRANCH: main
+          # To report GitHub Actions status checks
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
+          DISABLE_ERRORS: true 
       - name: Upload repo
         uses: actions/upload-artifact@v4
         with: 
