@@ -11,24 +11,23 @@ jobs:
     steps:
       - name: Clone down repository
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0       
       #- name: Build application
       #  run: ci/build-app.sh
       #- name: Test
       #  run: ci/unit-test-app.sh
-      - name: run linting
-        uses: super-linter/super-linter/slim@v7 
-        env:
-          DEFAULT_BRANCH: main
-          # To report GitHub Actions status checks
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
-          DISABLE_ERRORS: true 
+      #- name: run linting
+      #  uses: super-linter/super-linter/slim@v7 
+      #  env:
+      #    DEFAULT_BRANCH: main
+      #    # To report GitHub Actions status checks
+      #    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
+      #    DISABLE_ERRORS: true 
       - name: Upload repo
         uses: actions/upload-artifact@v4
         with: 
           name: code
           path: .
+          include-hidden-files: true
   Linting:
     runs-on: ubuntu-latest
     needs: [Build]
